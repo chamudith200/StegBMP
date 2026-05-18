@@ -2,7 +2,7 @@
 
 A simple steganography program tht can encode and decode data into/from BMP files using LSB written in C language
 
-### How to buld
+### How to build
 ``` bash
 gcc main.c -o bmp
 ```

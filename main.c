@@ -53,13 +53,13 @@ int main(int argc, char **argv) {
     init_BMP_Header(&bmp_FileHEader, &bmp_InfoHeader, 0xFF, 0xFF);
     uint8_t *pixelData = random_pic(&bmp_FileHEader, &bmp_InfoHeader);
     create_bmp(&bmp_FileHEader, &bmp_InfoHeader, pixelData, "original.bmp");
-    uint8_t *encodedPixelData = encode_pic(&bmp_FileHEader, &bmp_InfoHeader, pixelData, "ABCDEFGH", 8);
-    // uint8_t *encodedPixelData =  read_bmp("original.bmp");
+
+    uint8_t *encodedPixelData = encode_pic(&bmp_FileHEader, &bmp_InfoHeader, pixelData, "APPLE IS RED", 12);
     create_bmp(&bmp_FileHEader, &bmp_InfoHeader, encodedPixelData, "encoded.bmp");
 
     uint8_t *decodePixeldata = read_bmp("encoded.bmp");
     char *messege = decode_bmp(&bmp_InfoHeader, decodePixeldata);
-    messege[8] = '\0';
+    messege[12] = '\0';
     printf("messege : %s\n", messege);
 
     free(pixelData);
