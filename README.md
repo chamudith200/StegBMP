@@ -15,6 +15,11 @@ gcc main.c -o bmp
 BMP files contain a 24bit BGR pixels. So we can use this to store out data without making any significant visual artifacts to the original picture.
 For this we use the LSB of the red channel to store data. Each row of pixel contains exactly one byte of data. Maximum amount of data we can store depend on the verticle resolution of the image. So we can store a single ASCII character in a row (ASCII character can be stored with one byte)
 
+We start the encoding by the first bit of the byte. 
+If it's 1: We check the red channe and make it odd if it's even using the XOR (^) operator and vice versa for bits that are 0. Only the red chanel is used for the encoding
+The decodin is the same but in reverse. We check the red channel and if it's odd, it a 1 bit and if it's odd it's a 0 bit. then w construct a byte by looking at continuous 8 pixels and then move to the next row.
+
+The number of
 
 ## Code Explanation
 ### Header file intialization
@@ -52,9 +57,9 @@ int create_bmp(BMP_FileHeader *fileHeader, BMP_InfoHeader *infoHeader, uint8_t *
 Exaple usage:
 ``` c
 uint8_t *pixelData = random_pic(&bmp_FileHEader);
-    create_bmp(&bmp_FileHEader, &bmp_InfoHeader, pixelData, "original.bmp");
-    uint8_t *encodedPixelData = encode_pic(&bmp_FileHEader, &bmp_InfoHeader, pixelData, "ABCDEFGH", 8);
-    create_bmp(&bmp_FileHEader, &bmp_InfoHeader, encodedPixelData, "encoded.bmp");
+create_bmp(&bmp_FileHEader, &bmp_InfoHeader, pixelData, "original.bmp");
+uint8_t *encodedPixelData = encode_pic(&bmp_FileHEader, &bmp_InfoHeader, pixelData, "ABCDEFGH", 8);
+create_bmp(&bmp_FileHEader, &bmp_InfoHeader, encodedPixelData, "encoded.bmp");
 ```
 This will make create files original.bmp and encoded.bmp at the same directory as bmp.exe
 
@@ -72,7 +77,7 @@ printf("messege : %s\n", messege);
 ```
 Output:
 ``` bash
-PS User> ./bmp                                       
+PS StegBMP> ./bmp                                       
 Created : original.bmp
 Created : encoded.bmp
 65
@@ -84,4 +89,17 @@ Created : encoded.bmp
 71
 72
 messege : ABCDEFGH
+```
+
+### Memory ownership
+This program follows a **caller allocation ownership** patter for dynamic memory allocation. So the user must free those buffers after use to avoid memory leaks.
+Example usage:
+``` c
+uint8_t *pixelData = random_pic(&bmp_FileHEader);
+uint8_t *decodePixeldata = read_bmp("encoded.bmp");
+char *messege = decode_bmp(&bmp_InfoHeader, decodePixeldata);
+
+free(pixelData);
+free(encodedPixelData);
+free(messege);
 ```
