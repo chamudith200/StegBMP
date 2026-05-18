@@ -11,6 +11,21 @@ gcc main.c -o bmp
 ``` bash
 ./bmp
 ```
+### Output
+``` bash
+PS StegBMP> ./bmp                    
+Created : original.bmp
+Created : encoded.bmp
+65
+66
+67
+68
+69
+70
+71
+messege : ABCDEFG
+```
+
 ## Logic Explanation
 BMP files contain a 24bit BGR pixels. So we can use this to store out data without making any significant visual artifacts to the original picture.
 For this we use the LSB of the red channel to store data. Each row of pixel contains exactly one byte of data. Maximum amount of data we can store depend on the verticle resolution of the image. So we can store a single ASCII character in a row (ASCII character can be stored with one byte)
