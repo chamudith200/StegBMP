@@ -1,6 +1,6 @@
 # StegBMP
 
-A simple steganography program tht can encode and decode data into/from BMP files using LBS written in C language
+A simple steganography program tht can encode and decode data into/from BMP files using LSB written in C language
 
 ### How to buld
 ``` bash
@@ -11,7 +11,12 @@ gcc main.c -o bmp
 ``` bash
 ./bmp
 ```
-## Code Explenation
+## Logic Explanation
+BMP files contain a 24bit BGR pixels. So we can use this to store out data without making any significant visual artifacts to the original picture.
+For this we use the LSB of the red channel to store data. Each row of pixel contains exactly one byte of data. Maximum amount of data we can store depend on the verticle resolution of the image. So we can store a single ASCII character in a row (ASCII character can be stored with one byte)
+
+
+## Code Explanation
 ### Header file intialization
 
 with the following function we can initializa the header files needed for this project.
