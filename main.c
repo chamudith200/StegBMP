@@ -246,10 +246,6 @@ char *decode_bmp(BMP_InfoHeader *infoHeader, uint8_t *encodedPixelData) {
                 // is a 1
                 letter |= (0b1 << (7 - x));
             }
-            // else {
-            //     // is a 0
-            //     bit |= !((0b1 << (7 - x)));
-            // }
         }
         messege[y] = letter;
         printf("%i\n", letter);
