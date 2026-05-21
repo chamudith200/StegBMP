@@ -54,10 +54,14 @@ typedef struct {
     int padding;
 }BMP;
 ```
-**pixelData :** unisgned int BGR 8-bit color array containg all the color data of pixels  
+**pixelData :** unisgned int BGR 8-bit color array containg all the color data of pixels 
+
 **pxSize :** size of the pixel data array with padding (bytes)
+
 **padding :** BMP specific padding at the end of the line (bytes)
+
 ## Function definitions
+
 __void BMP_InitHeader(BMP *bmp, int width, int height)__
 
 This function initialize a BMP structure to recieve data.
@@ -79,13 +83,21 @@ BMP bmp_in;
 BMP_ReadFile(&bmp_in, "original.bmp");
 ```
 __int BMP_CreateFile(BMP *bmp, char *fileName)__
+
 This function create a BMP file on the disk according to the given BMP structure
+
 parameters:
+
 &emsp; bmp : pointer to the bmp stucture (BMP *)
+
 &emsp; filename : filename fo the BMP file to be created (char *)
+
 returns:
+
 &emsp; STEG_SUCCESS (0) on success
+
 &emsp; STEG_FAILURE (1) on failure
+
 example:
 ``` c
 BMP bmp_out;
