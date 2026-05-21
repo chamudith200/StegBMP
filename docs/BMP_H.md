@@ -54,9 +54,9 @@ typedef struct {
     int padding;
 }BMP;
 ```
-pixelData : &emsp;unisgned int BGR 8-bit color array containg all the color data of pixels
-pxSize : &nbsp;&emsp;&emsp;size of the pixel data array with padding (bytes)
-padding: &emsp;&emsp;BMP specific padding at the end of the line (bytes)
+**pixelData :** &emsp;unisgned int BGR 8-bit color array containg all the color data of pixels  
+**pxSize :** &nbsp;&emsp;&emsp;size of the pixel data array with padding (bytes)
+**padding :** &emsp;&emsp;BMP specific padding at the end of the line (bytes)
 ## Function definitions
 __void BMP_InitHeader(BMP *bmp, int width, int height)__
 This function initialize a BMP structure to recieve data.
