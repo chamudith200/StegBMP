@@ -54,6 +54,7 @@ typedef struct {
     int padding;
 }BMP;
 ```
+
 **pixelData :** unisgned int BGR 8-bit color array containg all the color data of pixels 
 
 **pxSize :** size of the pixel data array with padding (bytes)
@@ -79,9 +80,10 @@ returns:
 exapmle:
 
 ``` c
-BMP bmp_in;
-BMP_ReadFile(&bmp_in, "original.bmp");
+BMP bmp_out;
+BMP_InitHeader(&bmp_out, 256, 256); // random width, height values for demonstration
 ```
+
 ### int BMP_CreateFile(BMP *bmp, char *fileName)
 
 This function create a BMP file on the disk according to the given BMP structure
@@ -90,7 +92,7 @@ parameters:
 
 &emsp; bmp : pointer to the bmp stucture (BMP *)
 
-&emsp; filename : filename fo the BMP file to be created (char *)
+&emsp; fileName : filename fo the BMP file to be created (char *)
 
 returns:
 
@@ -103,4 +105,26 @@ example:
 BMP bmp_out;
 // Initialize the strcut and add pixel data
 BMP_CreateFile(&bmp_out, "cpy.bmp");
+```
+
+### int BMP_ReadFile(BMP *bmp, char *fileName)
+
+This function reads a BMP file into a BMP structure
+
+parameters:
+
+&emsp; bmp :  pinter to the destination BMP structure (BMP *)
+
+&emsp; fileName : name of the BMP file need to be read (char *)
+
+retunrns:
+
+&emsp; STEG_SUCCESS (0) on success
+
+&emsp; STEG_FAILURE (1) on failure
+
+example:
+``` c
+BMP bmp_in;
+BMP_ReadFile(&bmp_in, "original.bmp");
 ```
