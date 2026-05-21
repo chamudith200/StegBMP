@@ -46,3 +46,41 @@ typedef struct {
 __BMP__
 This structure holds all the data of the BMP file and some others require by some other functions as well.
 ``` c
+typedef struct {
+    BMP_FileHeader fileHeader;
+    BMP_InfoHeader infoHeader;
+    uint8_t *pixelData;     
+    int pxSize;
+    int padding;
+}BMP;
+```
+pixelData : &emsp;unisgned int BGR 8-bit color array containg all the color data of pixels
+pxSize : &nbsp;&emsp;&emsp;size of the pixel data array with padding (bytes)
+padding: &emsp;&emsp;BMP specific padding at the end of the line (bytes)
+## Function definitions
+__void BMP_InitHeader(BMP *bmp, int width, int height)__
+This function initialize a BMP structure to recieve data.
+parameters:
+&emsp; bmp : pointer to the BMP structure (BMP *)
+&emsp; width, height: width and height of the BMP image. (int) (just set it to 0 if don't know it yet)
+returns:
+&emsp;does not returns anything
+exapmle:
+``` c
+BMP bmp_in;
+BMP_ReadFile(&bmp_in, "original.bmp");
+```
+__int BMP_CreateFile(BMP *bmp, char *fileName)__
+This function create a BMP file on the disk according to the given BMP structure
+parameters:
+&emsp; bmp : pointer to the bmp stucture (BMP *)
+&emsp; filename : filename fo the BMP file to be created (char *)
+returns:
+&emsp; STEG_SUCCESS (0) on success
+&emsp; STEG_FAILURE (1) on failure
+example:
+``` c
+BMP bmp_out;
+// Initialize the strcut and add pixel data
+BMP_CreateFile(&bmp_out, "cpy.bmp");
+```
