@@ -62,7 +62,7 @@ typedef struct {
 
 ## Function definitions
 
-__void BMP_InitHeader(BMP *bmp, int width, int height)__
+### void BMP_InitHeader(BMP *bmp, int width, int height)
 
 This function initialize a BMP structure to recieve data.
 
@@ -82,7 +82,7 @@ exapmle:
 BMP bmp_in;
 BMP_ReadFile(&bmp_in, "original.bmp");
 ```
-__int BMP_CreateFile(BMP *bmp, char *fileName)__
+### int BMP_CreateFile(BMP *bmp, char *fileName)
 
 This function create a BMP file on the disk according to the given BMP structure
 
