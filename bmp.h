@@ -116,17 +116,32 @@ int BMP_CreateFile(BMP *bmp, char *fileName) {
     }
     
     // fileHeader
-    fwrite(fileHeader, sizeof(*fileHeader), 1, fp_bmp);
+    if (fwrite(fileHeader, sizeof(*fileHeader), 1, fp_bmp) != 1) {
+        printf("Fwrite failure : %s\n", fileName);
+        goto FUNC_FAIL;
+    }
 
     // infoHeader
-    fwrite(infoHeader, sizeof(*infoHeader), 1, fp_bmp);
+    if (fwrite(infoHeader, sizeof(*infoHeader), 1, fp_bmp) != 1) {
+        printf("Fwrite failure : %s\n", fileName);
+        goto FUNC_FAIL;
+    }
 
     // PixelData
-    fwrite(bmp->pixelData, bmp->pxSize, 1, fp_bmp);
+    if (fwrite(bmp->pixelData, bmp->pxSize, 1, fp_bmp) != 1) {
+        printf("Fwrite failure : %s\n", fileName);
+        goto FUNC_FAIL;
+    }
 
     fclose(fp_bmp);
     if (DBG) printf("Created : %s\n", fileName);
     return STG_SUCCESS;
+
+    FUNC_FAIL:
+    printf("Failed to write: %s\n", fileName);
+    fclose(fp_bmp);
+    return STG_FAILURE;
+
 }
 
 
