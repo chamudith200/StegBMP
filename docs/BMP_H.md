@@ -114,7 +114,6 @@ This function reads a BMP file into a BMP structure
 parameters:
 
 &emsp; bmp :  pinter to the destination BMP structure (BMP *)
-
 &emsp; fileName : name of the BMP file need to be read (char *)
 
 retunrns:
