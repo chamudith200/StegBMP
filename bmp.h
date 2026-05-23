@@ -263,13 +263,33 @@ int BMP_FillGradient(BMP *bmp, uint8_t color1[3], uint8_t color2[3]) {
 // Some abstracted funcs
 int BMP_CreateSolidFill(char *fileName, int height, int width, uint8_t color[3]) {
     if (height <= 0 || width <= 0) {
-        printf("Height or width can't be <= 0 : %s\n", fileName);
+        fprintf(stderr, "Height or width can't be <= 0 : %s\n", fileName);
         return BMP_FAILURE;
     }
     BMP bmp;
     BMP_InitHeader(&bmp, width, height);
-    BMP_FillSolid(&bmp, color);
-    BMP_CreateFile(&bmp, fileName);
+    if (BMP_FillSolid(&bmp, color) != BMP_SUCCESS) {
+        return BMP_FAILURE;
+    }
+    if (BMP_CreateFile(&bmp, fileName) != BMP_SUCCESS) {
+        return BMP_FAILURE;
+    }
+    free(bmp.pixelData);
+}
+
+int BMP_CreateGradientFill(char *fileName, int height, int width, uint8_t color1[3], uint8_t color2[3]) {
+    if (height <= 0 || width <= 0) {
+        fprintf(stderr, "Height or width can't be <= 0 : %s\n", fileName);
+        return BMP_FAILURE;
+    }
+    BMP bmp;
+    BMP_InitHeader(&bmp, width, height);
+    if (BMP_FillGradient(&bmp, color1, color2) != BMP_SUCCESS) {
+        return BMP_FAILURE;
+    }
+    if (BMP_CreateFile(&bmp, fileName) != BMP_SUCCESS) {
+        return BMP_FAILURE;
+    }
     free(bmp.pixelData);
 }
 
