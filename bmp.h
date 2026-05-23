@@ -205,7 +205,7 @@ int BMP_ReadFile(BMP *bmp, char *fileName) {
 }
 
 
-//
+// 
 int BMP_FillSolid(BMP *bmp, uint8_t color[3]) {
     uint8_t *pixelData = malloc(bmp->pxSize);
     if (!pixelData) {
