@@ -1,7 +1,0 @@
-{
-    "C_Cpp.errorSquiggles": "enabled",
-    "files.associations": {
-        "*.embeddedhtml": "html",
-        "bmp.h": "c"
-    }
-}

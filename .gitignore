@@ -1,6 +1,8 @@
 bmp.exe
 test.exe
 
+.vscode
+
 test.c
 main.c
 
