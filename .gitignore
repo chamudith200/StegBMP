@@ -6,3 +6,7 @@ test.c
 cpy.bmp
 original.bmp
 solid.bmp
+encoded.bmp
+grad.bmp
+
+tmp.txt
