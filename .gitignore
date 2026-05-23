@@ -2,6 +2,7 @@ bmp.exe
 test.exe
 
 test.c
+main.c
 
 cpy.bmp
 original.bmp
